@@ -8,6 +8,7 @@ public class ControlBird : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody; 
     [SerializeField] private float _speed = 5f; 
     [SerializeField] GameObject _gameOverIcon;
+    private bool _GamePaused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class ControlBird : MonoBehaviour
             _gameOverIcon.SetActive(true);
             // on fais stop time koua
             Time.timeScale = 0;
+            _GamePaused = true;
         }
     }
 
@@ -35,6 +37,7 @@ public class ControlBird : MonoBehaviour
         {
             SceneManager.LoadScene(0);
             Time.timeScale = 1;
+            
         }
 
         }
@@ -52,7 +55,7 @@ public class ControlBird : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
         }
 
-        if (Time.timeScale == 0 && Input.GetKeyDown(KeyCode.Space))
+        if (_GamePaused && Input.GetKeyDown(KeyCode.Space))
             {
 
                 ReplayGame();
