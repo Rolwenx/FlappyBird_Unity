@@ -8,7 +8,7 @@ public class ControlBird : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody; 
     [SerializeField] private float _speed = 5f; 
     [SerializeField] GameObject _gameOverIcon;
-    private bool _GamePaused = false;
+    private bool _GamePaused = false; 
 
     // Start is called before the first frame update
     void Start()
