@@ -28,6 +28,14 @@ public class ControlBird : MonoBehaviour
             Time.timeScale = 0;
             _GamePaused = true;
         }
+
+        if(collision.gameObject.CompareTag("Pipe")){
+
+            _gameOverIcon.SetActive(true);
+            // on fais stop time koua
+            Time.timeScale = 0;
+            _GamePaused = true;
+        }
     }
 
     public void ReplayGame()
