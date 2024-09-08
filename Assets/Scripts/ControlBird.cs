@@ -10,6 +10,8 @@ public class ControlBird : MonoBehaviour
     [SerializeField] GameObject _gameOverIcon;
     private bool _GamePaused = false; 
 
+    public GameObject collision_music;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,11 @@ public class ControlBird : MonoBehaviour
             Time.timeScale = 0;
             _GamePaused = true;
         }
+
+        // we create the object of collision music
+        GameObject CollisionMusicObject = Instantiate(collision_music, transform.position, transform.rotation);
+        AudioSource CollisionMusicAudioSource = CollisionMusicObject.GetComponent<AudioSource>();
+
     }
     public void ReplayGame(){
         

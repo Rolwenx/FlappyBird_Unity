@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17295ed74e9374741bdf9dfcba64d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gainPoint_music: {fileID: 2994498475349135822, guid: 04b373871dffe4996a74d8e983107092, type: 3}
 --- !u!1 &7977268473185291625
 GameObject:
   m_ObjectHideFlags: 0

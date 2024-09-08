@@ -53,8 +53,8 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void ResetScore()
-{
-    _currentScore = 0;
-    _currentScoreText.text = _currentScore.ToString();
-}
+    {
+        _currentScore = 0;
+        _currentScoreText.text = _currentScore.ToString();
+    }
 }
