@@ -14,14 +14,16 @@ public class ControlBird : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bestScoreText; 
     [SerializeField] private TextMeshProUGUI _gameOverCurrentScoreText; 
     [SerializeField] private TextMeshProUGUI _gameOverBestScoreText; 
+    [SerializeField] private GameObject _startGamePanel;
 
     public static ControlBird instance;
 
     public GameObject collision_music;
 
-    [SerializeField] private RuntimeAnimatorController[] birdAnimations; // Different animation controllers for each color
+    [SerializeField] private RuntimeAnimatorController[] birdAnimations;
     [SerializeField] private Animator birdAnimator;
 
+    private bool _gameStarted = false;
     private void Awake()
     {
         if (instance == null)
@@ -40,10 +42,11 @@ public class ControlBird : MonoBehaviour
         }
 
         _gameOverPanel.SetActive(false);
+        _startGamePanel.SetActive(true);
+        Time.timeScale = 0; 
         int selectedColorIndex = PlayerPrefs.GetInt("BirdColor", 0);
 
         birdAnimator.runtimeAnimatorController = birdAnimations[selectedColorIndex];
-        Time.timeScale = 1;
     }
 
     private void GameOver(){
@@ -84,15 +87,29 @@ public class ControlBird : MonoBehaviour
     void Update()
     {
 
-        // GetKey is for continuous press, GetKeyDown is for the first press, 
-        // GetKeyUp is for release
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!_gameStarted && Input.GetKeyDown(KeyCode.Space))
         {
-            _rigidbody.velocity = Vector2.zero; 
-            _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
+            StartGame();
         }
 
+        if (_gameStarted)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _rigidbody.velocity = Vector2.zero; 
+                _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
+            }
+
+            Debug.Log(ScoreManager.instance.GetCurrentScore());
+        }
+
+    }
+
+    private void StartGame()
+    {
+        _startGamePanel.SetActive(false);
+        Time.timeScale = 1; 
+        _gameStarted = true;
     }
 }
 
