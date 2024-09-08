@@ -569,7 +569,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfdee816cef8343f0baf1a0648e8f704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pipe: {fileID: 2103718158589275499, guid: 309d89b7cd8944f0eac95a188c8fcf61, type: 3}
+  _pipePairPrefab: {fileID: 2103718158589275499, guid: 309d89b7cd8944f0eac95a188c8fcf61, type: 3}
+  _spawnInterval: 2
+  _gapSize: 4
+  _maxYOffset: 2
 --- !u!4 &871458660
 Transform:
   m_ObjectHideFlags: 0
