@@ -752,7 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 160943797}
-  _speed: 5.5
+  _speed: 5
   _gameOverPanel: {fileID: 1607359664}
   _currentScoreText: {fileID: 2084210008}
   _bestScoreText: {fileID: 1408656673}

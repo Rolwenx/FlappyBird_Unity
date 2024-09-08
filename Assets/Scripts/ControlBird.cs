@@ -51,6 +51,7 @@ public class ControlBird : MonoBehaviour
         birdAnimator.runtimeAnimatorController = birdAnimations[selectedColorIndex];
     }
 
+
     private void GameOver(){
         _gameOverPanel.SetActive(true);
         _gamedOver = true;
@@ -65,9 +66,13 @@ public class ControlBird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision){
 
 
-        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Pipe")){
+        Debug.Log("Collision Detected with: " + collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Pipe"))
+        {
             GameOver();
         }
+
         // we create the object of collision music
         GameObject CollisionMusicObject = Instantiate(collision_music, transform.position, transform.rotation);
         AudioSource CollisionMusicAudioSource = CollisionMusicObject.GetComponent<AudioSource>();
@@ -89,7 +94,6 @@ public class ControlBird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (!_gameStarted && Input.GetKeyDown(KeyCode.Space))
         {
             StartGame();
@@ -102,8 +106,6 @@ public class ControlBird : MonoBehaviour
                 _rigidbody.velocity = Vector2.zero; 
                 _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
             }
-
-            Debug.Log(ScoreManager.instance.GetCurrentScore());
         }
 
     }
@@ -114,5 +116,6 @@ public class ControlBird : MonoBehaviour
         Time.timeScale = 1; 
         _gameStarted = true;
     }
+
 }
 
