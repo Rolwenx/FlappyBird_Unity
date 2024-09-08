@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 160943801}
   - component: {fileID: 160943802}
   m_Layer: 0
-  m_Name: redbird-midflap
+  m_Name: bluebird-midflap
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
