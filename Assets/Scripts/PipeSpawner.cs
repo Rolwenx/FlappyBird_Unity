@@ -4,53 +4,57 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _pipePairPrefab;  // Reference to the pipe pair prefab (parent GameObject containing both pipes)
-    [SerializeField] private float _spawnInterval = 2f;   // Time between spawns
-    [SerializeField] private float _gapSize = 4f;         // Gap size between the top and bottom pipes
-    [SerializeField] private float _maxYOffset = 2f;      // Maximum offset for vertical movement of the pipe pair to make the game dynamic
-    private float _timer = 0;
+    [SerializeField] private GameObject _pipe;
+    [SerializeField] private float _initialSpawnTime = 2f; 
+    [SerializeField] private float _spawnTimeDecrease = 0.1f;
+    [SerializeField] private float _minSpawnTime = 0.5f; 
+    [SerializeField] private float _initialHeightRange = 2f;  
+    [SerializeField] private float _heightRangeDecrease = 0.1f; 
+    [SerializeField] private float _minHeightRange = 1f; 
+    [SerializeField] private float _minPipeSpacing = 2f; 
+    [SerializeField] private float _maxPipeSpacing = 5f; 
 
-    void Start()
-    {
-        SpawnPipePair();  // Spawn the first pair immediately
+    private float _timer;
+    private float _spawnTime;
+    private float _heightRange;
+
+    private void Start(){
+        _spawnTime = _initialSpawnTime;
+        _heightRange = _initialHeightRange;
+        _timer = 0;
+        SpawnPipe();
     }
 
-    void Update()
-    {
-        if (_timer < _spawnInterval)
+    private void Update(){
+        _timer += Time.deltaTime;
+
+        if (_timer > _spawnTime)
         {
-            _timer += Time.deltaTime;
-        }
-        else
-        {
-            SpawnPipePair();  // Spawn pipe pairs at regular intervals
+            SpawnPipe();
             _timer = 0;
+
+            // Increase difficulty
+            if (_spawnTime > _minSpawnTime)
+            {
+                _spawnTime -= _spawnTimeDecrease;
+            }
+
+            if (_heightRange > _minHeightRange)
+            {
+                _heightRange -= _heightRangeDecrease;
+            }
         }
     }
 
-    // Method to spawn a pair of pipes with a randomized vertical offset
-    void SpawnPipePair()
-    {
-        // Randomize the vertical offset for the pipe pair within the given bounds (_maxYOffset)
-        float yOffset = Random.Range(-_maxYOffset, _maxYOffset);
+    private void SpawnPipe(){
 
-        // Position for the pipe pair, with the Y-offset applied
-        Vector3 spawnPosition = new Vector3(transform.position.x, yOffset, 0);
+        float pipeSpacing = Random.Range(_minPipeSpacing, _maxPipeSpacing);
 
-        // Instantiate the pipe pair prefab with the correct position
-        GameObject pipePair = Instantiate(_pipePairPrefab, spawnPosition, Quaternion.identity);
+        float gapHeight = Random.Range(-_heightRange, _heightRange); 
 
-        // Adjust the top and bottom pipes within the pipe pair prefab to have the specified gap
-        Transform topPipe = pipePair.transform.Find("TopPipe");  // Find the top pipe in the prefab
-        Transform bottomPipe = pipePair.transform.Find("BottomPipe");  // Find the bottom pipe in the prefab
-
-        if (topPipe != null && bottomPipe != null)
-        {
-            // Position the top pipe above the gap
-            topPipe.transform.localPosition = new Vector3(0, _gapSize / 2, 0);
-
-            // Position the bottom pipe below the gap
-            bottomPipe.transform.localPosition = new Vector3(0, -_gapSize / 2, 0);
-        }
+        Vector3 spawnPosition = transform.position + new Vector3(pipeSpacing, gapHeight);
+        GameObject pipe = Instantiate(_pipe, spawnPosition, Quaternion.identity);
+        Destroy(pipe, 20f);
     }
+
 }

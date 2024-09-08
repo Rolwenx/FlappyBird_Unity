@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         _currentScoreText.text = _currentScore.ToString();
-        _BestScoreText.text = "Best Score:\n" + PlayerPrefs.GetInt("HighScore", 0).ToString();
+        _BestScoreText.text = "Best Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         ResetScore();
         UpdateBestScore();
     }
@@ -48,7 +48,7 @@ public class ScoreManager : MonoBehaviour
         if (_currentScore > highestScore)
         {
             PlayerPrefs.SetInt("HighScore", _currentScore); 
-            _BestScoreText.text = "Best Score:\n" + _currentScore.ToString();
+            _BestScoreText.text = "Best Score: " + _currentScore.ToString();
         }
     }
 
