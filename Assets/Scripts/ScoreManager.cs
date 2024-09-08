@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,9 +27,9 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("hi");
         _currentScoreText.text = _currentScore.ToString();
-        _BestScoreText.text = "Best Score:\n" + PlayerPrefs.GetInt("HighScore",0).ToString();
+        _BestScoreText.text = "Best Score:\n" + PlayerPrefs.GetInt("HighScore", 0).ToString();
+        ResetScore();
         UpdateBestScore();
     }
 
@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void UpdateBestScore()
+    public void UpdateBestScore()
     {
         int highestScore = PlayerPrefs.GetInt("HighScore", 0); 
         if (_currentScore > highestScore)
@@ -56,5 +56,15 @@ public class ScoreManager : MonoBehaviour
     {
         _currentScore = 0;
         _currentScoreText.text = _currentScore.ToString();
+    }
+
+    public int GetCurrentScore()
+    {
+        return _currentScore;
+    }
+
+    public int GetBestScore()
+    {
+        return PlayerPrefs.GetInt("HighScore", 0);
     }
 }

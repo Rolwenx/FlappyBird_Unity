@@ -2,15 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ControlBird : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody; 
     [SerializeField] private float _speed = 5f; 
-    [SerializeField] GameObject _gameOverIcon;
-    private bool _GamePaused = false; 
+    [SerializeField] GameObject _gameOverPanel;
+
+    [SerializeField] private TextMeshProUGUI _currentScoreText;  
+    [SerializeField] private TextMeshProUGUI _bestScoreText; 
+    [SerializeField] private TextMeshProUGUI _gameOverCurrentScoreText; 
+    [SerializeField] private TextMeshProUGUI _gameOverBestScoreText; 
+
+    public static ControlBird instance;
 
     public GameObject collision_music;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this; 
+        }
+ 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,42 +35,42 @@ public class ControlBird : MonoBehaviour
         {
             _rigidbody = GetComponent<Rigidbody2D>();
         }
+
+        _gameOverPanel.SetActive(false);
     }
 
+    private void GameOver(){
+        _gameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+        _currentScoreText.gameObject.SetActive(false);
+        _bestScoreText.gameObject.SetActive(false);
+
+        _gameOverCurrentScoreText.text = "Score:\n" + ScoreManager.instance.GetCurrentScore().ToString();
+        _gameOverBestScoreText.text = "Best Score:\n" + ScoreManager.instance.GetBestScore().ToString();
+
+    }
     private void OnCollisionEnter2D(Collision2D collision){
 
-        if(collision.gameObject.CompareTag("Ground")){
 
-            _gameOverIcon.SetActive(true);
-            // on fais stop time koua
-            Time.timeScale = 0;
-            _GamePaused = true;
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Pipe")){
+            GameOver();
         }
-
-        if(collision.gameObject.CompareTag("Pipe")){
-
-            _gameOverIcon.SetActive(true);
-            // on fais stop time koua
-            Time.timeScale = 0;
-            _GamePaused = true;
-        }
-
         // we create the object of collision music
         GameObject CollisionMusicObject = Instantiate(collision_music, transform.position, transform.rotation);
         AudioSource CollisionMusicAudioSource = CollisionMusicObject.GetComponent<AudioSource>();
 
+        Destroy(CollisionMusicObject, CollisionMusicAudioSource.clip.length);
+
     }
     public void ReplayGame(){
-        
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ScoreManager.instance.ResetScore();
-            SceneManager.LoadScene(1);
-            Time.timeScale = 1;
+        ScoreManager.instance.ResetScore();
+         ScoreManager.instance.UpdateBestScore();
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+        _currentScoreText.gameObject.SetActive(true);
+        _bestScoreText.gameObject.SetActive(true);
+        _gameOverPanel.SetActive(false);
             
-        }
-
     }
 
     // Update is called once per frame
@@ -70,11 +86,7 @@ public class ControlBird : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
         }
 
-        if (_GamePaused && Input.GetKeyDown(KeyCode.Space))
-            {
-
-                ReplayGame();
-            }
+        Debug.Log(ScoreManager.instance.GetCurrentScore());
 
     }
 }

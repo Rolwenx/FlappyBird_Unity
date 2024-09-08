@@ -10,6 +10,11 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(sceneID);
     }
 
+    public void ReplayGameMatch(){
+
+        ControlBird.instance.ReplayGame();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

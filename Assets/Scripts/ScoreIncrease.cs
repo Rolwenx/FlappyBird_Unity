@@ -16,5 +16,7 @@ public class ScoreIncrease : MonoBehaviour
         GameObject GainPointMusicObject = Instantiate(gainPoint_music, transform.position, transform.rotation);
         AudioSource GainPointMusicAudioSource = GainPointMusicObject.GetComponent<AudioSource>();
 
+        Destroy(GainPointMusicObject, GainPointMusicAudioSource.clip.length);
+
     }
 }
