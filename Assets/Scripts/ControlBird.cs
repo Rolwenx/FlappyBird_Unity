@@ -93,8 +93,6 @@ public class ControlBird : MonoBehaviour
             _rigidbody.AddForce(new Vector2(0f, _speed), ForceMode2D.Impulse); 
         }
 
-        Debug.Log(ScoreManager.instance.GetCurrentScore());
-
     }
 }
 

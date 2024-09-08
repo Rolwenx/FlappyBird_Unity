@@ -6,9 +6,11 @@ public class PipeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _pipe;
     [SerializeField] private float _initialSpawnTime = 2f; 
+    // As the game progress,  the spawn time will be reduced so it's good
     [SerializeField] private float _spawnTimeDecrease = 0.1f;
     [SerializeField] private float _minSpawnTime = 0.5f; 
     [SerializeField] private float _initialHeightRange = 2f;  
+     // Same as before, the height range will be decreased as the game progress
     [SerializeField] private float _heightRangeDecrease = 0.1f; 
     [SerializeField] private float _minHeightRange = 1f; 
     [SerializeField] private float _minPipeSpacing = 2f; 
@@ -33,7 +35,6 @@ public class PipeSpawner : MonoBehaviour
             SpawnPipe();
             _timer = 0;
 
-            // Increase difficulty
             if (_spawnTime > _minSpawnTime)
             {
                 _spawnTime -= _spawnTimeDecrease;
