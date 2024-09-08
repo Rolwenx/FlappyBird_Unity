@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: GAMERIA SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1936195195
   material: {fileID: 1464033125447866919}
-  materialHashCode: 0
+  materialHashCode: 233328645
   m_Version: 1.1.0
   m_SourceFontFileGUID: 8c7676296fcc64115bac0bf48e03c75f
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 8c7676296fcc64115bac0bf48e03c75f, type: 3}
@@ -721,9 +721,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0

@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         Debug.Log("hi");
-        _currentScoreText.text = "Score:\n" + _currentScore.ToString();
+        _currentScoreText.text = _currentScore.ToString();
         _BestScoreText.text = "Best Score:\n" + PlayerPrefs.GetInt("HighScore",0).ToString();
         UpdateBestScore();
     }
@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour
     public void PlayerScores()
     {
         _currentScore++;
-        _currentScoreText.text = "Score:\n" + _currentScore.ToString(); 
+        _currentScoreText.text = _currentScore.ToString(); 
         UpdateBestScore();
     }
 
@@ -55,6 +55,6 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
 {
     _currentScore = 0;
-    _currentScoreText.text = "Score:\n" + _currentScore.ToString();
+    _currentScoreText.text = _currentScore.ToString();
 }
 }
