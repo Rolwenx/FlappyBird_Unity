@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 93c02b3a9912943dea7b137ba0362a07
+  - enabled: 1
+    path: Assets/Scenes/ChooseColor.unity
+    guid: 4a53ff74397da4a98890fe908aecd319
   m_configObjects: {}

@@ -19,6 +19,9 @@ public class ControlBird : MonoBehaviour
 
     public GameObject collision_music;
 
+    [SerializeField] private RuntimeAnimatorController[] birdAnimations; // Different animation controllers for each color
+    [SerializeField] private Animator birdAnimator;
+
     private void Awake()
     {
         if (instance == null)
@@ -37,6 +40,10 @@ public class ControlBird : MonoBehaviour
         }
 
         _gameOverPanel.SetActive(false);
+        int selectedColorIndex = PlayerPrefs.GetInt("BirdColor", 0);
+
+        birdAnimator.runtimeAnimatorController = birdAnimations[selectedColorIndex];
+        Time.timeScale = 1;
     }
 
     private void GameOver(){
