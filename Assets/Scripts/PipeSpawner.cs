@@ -5,7 +5,7 @@ using UnityEngine;
 public class PipeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _pipe;
-    [SerializeField] private float _initialSpawnTime = 2f; 
+    [SerializeField] private float _initialSpawnTime = 1f; 
     // As the game progress,  the spawn time will be reduced so it's good
     [SerializeField] private float _spawnTimeDecrease = 0.1f;
     [SerializeField] private float _minSpawnTime = 0.5f; 

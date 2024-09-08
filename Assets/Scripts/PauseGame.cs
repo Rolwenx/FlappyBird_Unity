@@ -13,10 +13,15 @@ public class PauseGame : MonoBehaviour
             PausePanel.SetActive(false);
         }
     }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) )
+
+        if (ControlBird.instance._gamedOver) 
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P) && ControlBird.instance._gameStarted)
         {
             if (isPaused)
             {
@@ -28,6 +33,7 @@ public class PauseGame : MonoBehaviour
             }
         }
     }
+
 
     public void Pause()
     {

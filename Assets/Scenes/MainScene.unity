@@ -765,6 +765,8 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 65c368adedd334de9989be8746023625, type: 2}
   - {fileID: 9100000, guid: b192d410779bb48ec9d349d9498d5256, type: 2}
   birdAnimator: {fileID: 160943802}
+  _gameStarted: 0
+  _gamedOver: 0
 --- !u!61 &160943801
 BoxCollider2D:
   m_ObjectHideFlags: 0

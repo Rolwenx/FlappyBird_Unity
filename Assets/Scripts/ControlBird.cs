@@ -23,7 +23,9 @@ public class ControlBird : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController[] birdAnimations;
     [SerializeField] private Animator birdAnimator;
 
-    private bool _gameStarted = false;
+    public bool _gameStarted = false;
+    public bool _gamedOver = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -51,6 +53,7 @@ public class ControlBird : MonoBehaviour
 
     private void GameOver(){
         _gameOverPanel.SetActive(true);
+        _gamedOver = true;
         Time.timeScale = 0;
         _currentScoreText.gameObject.SetActive(false);
         _bestScoreText.gameObject.SetActive(false);
