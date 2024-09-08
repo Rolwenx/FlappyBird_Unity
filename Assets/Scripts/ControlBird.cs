@@ -37,18 +37,18 @@ public class ControlBird : MonoBehaviour
             _GamePaused = true;
         }
     }
+    public void ReplayGame(){
+        
 
-    public void ReplayGame()
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            if (Input.GetKeyDown(KeyCode.Space))
-        {
+            ScoreManager.instance.ResetScore();
             SceneManager.LoadScene(1);
             Time.timeScale = 1;
             
         }
 
-        }
+    }
 
     // Update is called once per frame
     void Update()
