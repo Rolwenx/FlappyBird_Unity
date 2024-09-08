@@ -498,6 +498,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 160943797}
   _speed: 5.5
   _gameOverIcon: {fileID: 1129651274}
+  collision_music: {fileID: 2115447940051962825, guid: d0d0cda12cc8547789b41fa7aceded84, type: 3}
 --- !u!61 &160943801
 BoxCollider2D:
   m_ObjectHideFlags: 0
